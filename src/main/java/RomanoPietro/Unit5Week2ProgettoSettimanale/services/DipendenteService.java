@@ -49,6 +49,7 @@ public class DipendenteService {
         if(size > 100) size = 100;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return this.dipendenteRepository.findAll(pageable);
+
     }
 
     //3.======================================================================================================================
