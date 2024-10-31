@@ -40,6 +40,7 @@ public class DipendenteService {
         Dipendente newUser = new Dipendente(body.username(), body.nome(), body.cognome(), body.email()
                 , "https://ui-avatars.com/api/?name=" + body.nome() + "-" + body.cognome());
         return this.dipendenteRepository.save(newUser);
+
     }
 
     //2.======================================================================================================================
