@@ -30,7 +30,7 @@ public class ViaggioService {
     public Viaggio save(NewViaggioDTO body) {
         Viaggio newViaggio = new Viaggio(body.destinazione(),
                 body.data(),
-                StatoViaggio.valueOf(body.stato()));
+                StatoViaggio.valueOf(body.stato().toUpperCase()));
         return this.viaggioRepository.save(newViaggio);
     }
 
@@ -55,7 +55,7 @@ public class ViaggioService {
 
         found.setDestinazione(body.destinazione());
         found.setData(body.data());
-        found.setStatoViaggio(StatoViaggio.valueOf(body.stato()));
+        found.setStatoViaggio(StatoViaggio.valueOf(body.stato().toUpperCase()));
 
         return this.viaggioRepository.save(found);
     }

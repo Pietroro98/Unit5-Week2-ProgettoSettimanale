@@ -3,11 +3,11 @@ package RomanoPietro.Unit5Week2ProgettoSettimanale.controllers;
 /*
 *****************************CRUD******************************
 *
-1. GET http://localhost:3001/viaggio
-2. POST http://localhost:3001/viaggio (+ req.body) --> 201
-3. GET http://localhost:3001/viaggio/{viaggioId}
-4. PUT http://localhost:3001/viaggio/{viaggioId} (+ req.body)
-5. DELETE http://localhost:3001/viaggio/{viaggioId} --> 204
+1. GET http://localhost:3001/viaggi
+2. POST http://localhost:3001/viaggi (+ req.body) --> 201
+3. GET http://localhost:3001/viaggi/{viaggioId}
+4. PUT http://localhost:3001/viaggi/{viaggioId} (+ req.body)
+5. DELETE http://localhost:3001/viaggi/{viaggioId} --> 204
 *
 * **************************************************************
 */
@@ -19,7 +19,6 @@ import RomanoPietro.Unit5Week2ProgettoSettimanale.services.ViaggioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +26,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
-@Controller
-@RequestMapping("/viaggio")
+@RestController
+@RequestMapping("/viaggi")
 public class ViaggioController {
 
     @Autowired
     private ViaggioService viaggioService;
 
 
-    //1. GET http://localhost:3001/viaggio
+    //1. GET http://localhost:3001/viaggi
     @GetMapping
     public Page<Viaggio> findAll(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "10") int size,
@@ -43,7 +42,7 @@ public class ViaggioController {
         return this.viaggioService.findAll(page, size, sortBy);
     }
 
-    //2. POST http://localhost:3001/viaggio (+ req.body) --> 201
+    //2. POST http://localhost:3001/viaggi (+ req.body) --> 201
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Viaggio save(@RequestBody @Validated NewViaggioDTO body, BindingResult validationResult) {
@@ -58,19 +57,19 @@ public class ViaggioController {
         return this.viaggioService.save(body);
     }
 
-    // 3. GET http://localhost:3001/viaggio/{viaggioId}
+    // 3. GET http://localhost:3001/viaggi/{viaggioId}
     @GetMapping("/{viaggioId}")
     public Viaggio findById(@PathVariable long viaggioId) {
         return this.viaggioService.findById(viaggioId);
     }
 
-    // 4. PUT http://localhost:3001/viaggio/{viaggioId} (+ req.body)
+    // 4. PUT http://localhost:3001/viaggi/{viaggioId} (+ req.body)
     @PutMapping("/{viaggioId}")
     public Viaggio findByIdAndUpdate(@PathVariable long viaggioId, @RequestBody NewViaggioDTO body) {
         return this.viaggioService.findByIdAndUpdate(viaggioId, body);
     }
 
-    // 5. DELETE http://localhost:3001/viaggio/{viaggioId} --> 204
+    // 5. DELETE http://localhost:3001/viaggi/{viaggioId} --> 204
     @DeleteMapping("/{viaggioId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable long viaggioId) {
