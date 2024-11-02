@@ -60,9 +60,21 @@ public class PrenotazioniController {
     }
 
     //3. GET http://localhost:3005/prenotazioni/{prenotazioneId}
+    @GetMapping("/{prenotazioneId}")
+    public Prenotazioni findById(@PathVariable long prenotazioneId) {
+        return this.prenotazioniService.findById(prenotazioneId);
+    }
 
     //4. PUT http://localhost:3005/prenotazioni/{prenotazioneId} (+ req.body)
+    @PutMapping("/{prenotazioneId}")
+    public Prenotazioni findByIdAndUpdate(@PathVariable long prenotazioneId, @RequestBody NewPrenotazioniDTO body) {
+        return this.prenotazioniService.findByIdAndUpdate(prenotazioneId, body);
+    }
 
     //5. DELETE http://localhost:3005/prenotazioni/{prenotazioneId} --> 204
-
+    @DeleteMapping("/{prenotazioneId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable long prenotazioneId) {
+        this.prenotazioniService.findByIdAndDelete(prenotazioneId);
+    }
 }

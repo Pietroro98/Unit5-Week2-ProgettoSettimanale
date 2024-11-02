@@ -3,7 +3,9 @@ package RomanoPietro.Unit5Week2ProgettoSettimanale.services;
 
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Viaggio;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.enums.StatoViaggio;
+import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.BadRequestException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.NotFoundException;
+import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.ViaggioNotFoundException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewViaggioDTO;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.repositories.ViaggioRepository;
 import com.cloudinary.Cloudinary;
@@ -30,7 +32,7 @@ public class ViaggioService {
     public Viaggio save(NewViaggioDTO body) {
         Viaggio newViaggio = new Viaggio(body.destinazione(),
                 body.data(),
-                StatoViaggio.valueOf(body.stato().toUpperCase()));
+                StatoViaggio.valueOf(body.stato()));
         return this.viaggioRepository.save(newViaggio);
     }
 
@@ -53,9 +55,13 @@ public class ViaggioService {
     public Viaggio findByIdAndUpdate(long viaggioId, NewViaggioDTO body) {
         Viaggio found = this.findById(viaggioId);
 
+//        if(found.getData().equals(body.data())
+//                && found.getDestinazione().equals(body.destinazione()))
+//            this.viaggioRepository.findByDataAndDestinazione(body.data(), body.destinazione());
+
         found.setDestinazione(body.destinazione());
         found.setData(body.data());
-        found.setStatoViaggio(StatoViaggio.valueOf(body.stato().toUpperCase()));
+        found.setStatoViaggio(StatoViaggio.valueOf(body.stato()));
 
         return this.viaggioRepository.save(found);
     }
@@ -66,4 +72,19 @@ public class ViaggioService {
         Viaggio found = this.findById(viaggioId);
         this.viaggioRepository.delete(found);
     }
+
+//    //6.=============================================
+//
+//        public Viaggio updateNuovoStato(long viaggioId, String nuovoStato) {
+//        Viaggio found = viaggioRepository.findById(viaggioId)
+//                .orElseThrow(() -> new ViaggioNotFoundException("Viaggio non trovato con ID: " + viaggioId));
+//
+//        if (nuovoStato != null && !nuovoStato.isEmpty()) {
+//            found.setStatoViaggio(StatoViaggio.valueOf(nuovoStato));
+//        } else {
+//            throw new BadRequestException("Lo stato non può essere nullo o vuoto!");
+//        }
+//
+//        return viaggioRepository.save(found);
+//    }
 }

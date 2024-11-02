@@ -75,4 +75,10 @@ public class ViaggioController {
     public void findByIdAndDelete(@PathVariable long viaggioId) {
         this.viaggioService.findByIdAndDelete(viaggioId);
     }
+
+//    // 6. PATCH http://localhost:3005/viaggi/{viaggioId}/stato (+ req.body)
+//    @PatchMapping("/{viaggioId}/stato")
+//    public Viaggio updateStato(@PathVariable long viaggioId, @RequestBody String nuovoStato) {
+//        return this.viaggioService.updateNuovoStato(viaggioId, nuovoStato);
+//    }
 }

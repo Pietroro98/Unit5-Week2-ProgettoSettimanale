@@ -5,6 +5,7 @@ import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Dipendente;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Prenotazioni;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Viaggio;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.BadRequestException;
+import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.NotFoundException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewPrenotazioniDTO;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.repositories.PrenotazioniRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,25 @@ public class PrenotazioniService {
 
         return prenotazioniRepository.save(newPrenotazione);
     }
+    //3.======================================================================================================================
+
+    public Prenotazioni findById(long prenotazioneId) {
+        return this.prenotazioniRepository.findById(prenotazioneId).orElseThrow(() -> new NotFoundException(prenotazioneId));
+    }
+
+    //4.======================================================================================================================
+
+    public Prenotazioni findByIdAndUpdate(long prenotazioneId, NewPrenotazioniDTO body) {
+        Prenotazioni found = this.findById(prenotazioneId);
+
+        found.setViaggio(viaggioService.findById(body.viaggioId()));
+        return prenotazioniRepository.save(found);
+    }
+
+    //5.======================================================================================================================
+        public void findByIdAndDelete(long prenotazioneId) {
+        Prenotazioni found = this.findById(prenotazioneId);
+        this.prenotazioniRepository.delete(found);
+        }
+
 }
