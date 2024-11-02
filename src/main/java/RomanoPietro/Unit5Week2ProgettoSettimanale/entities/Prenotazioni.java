@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Prenotazioni {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
