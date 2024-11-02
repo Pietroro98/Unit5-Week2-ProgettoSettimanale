@@ -20,5 +20,6 @@ public class ServerConfiguration {
         config.put("api_key", apikey);
         config.put("api_secret", secret);
         return new Cloudinary(config);
+
     }
 }
