@@ -35,5 +35,6 @@ public class Prenotazioni {
         this.dipendente = dipendente;
         this.dataRichiesta = dataRichiesta;
         this.preferenze = preferenze;
+
     }
 }
