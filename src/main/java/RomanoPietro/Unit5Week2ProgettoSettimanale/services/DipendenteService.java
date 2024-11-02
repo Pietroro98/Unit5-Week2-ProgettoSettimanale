@@ -2,14 +2,10 @@ package RomanoPietro.Unit5Week2ProgettoSettimanale.services;
 
 
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Dipendente;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Viaggio;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.enums.StatoViaggio;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.BadRequestException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.NotFoundException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewDipendenteDTO;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewViaggioDTO;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.repositories.DipendenteRepository;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.repositories.ViaggioRepository;
 import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
 public class DipendenteService {
@@ -61,10 +56,7 @@ public class DipendenteService {
     //4.======================================================================================================================
 
     public Dipendente findByIdAndUpdate(long dipendenteId, NewDipendenteDTO body) {
-        //1. controllo se la email é giá in uso:
         Dipendente found = this.findById(dipendenteId);
-
-        //2. controllo se l'email nuova é giá in uso
         if(found.getEmail().equals(body.email())) {
             this.dipendenteRepository.findByEmail(body.email()).ifPresent(
                     user -> {
@@ -72,15 +64,11 @@ public class DipendenteService {
                     }
             );
         }
-
-        //3. Modifico l'utente trovato nel db
         found.setUsername(body.username());
         found.setNome(body.nome());
         found.setCognome(body.cognome());
         found.setEmail(body.email());
         found.setAvatarURL("https://ui-avatars.com/api/?name=" + body.nome() + "-" + body.cognome());
-
-        //4. Salvo nuovamente l'utente
         return this.dipendenteRepository.save(found);
     }
 

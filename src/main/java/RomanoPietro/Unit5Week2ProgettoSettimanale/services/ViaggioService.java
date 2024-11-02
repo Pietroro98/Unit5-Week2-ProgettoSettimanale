@@ -3,7 +3,6 @@ package RomanoPietro.Unit5Week2ProgettoSettimanale.services;
 
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Viaggio;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.enums.StatoViaggio;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.BadRequestException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.NotFoundException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewViaggioDTO;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.repositories.ViaggioRepository;
@@ -15,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+
 
 @Service
 public class ViaggioService {
