@@ -1,15 +1,12 @@
 package RomanoPietro.Unit5Week2ProgettoSettimanale.controllers;
 
 import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Dipendente;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.entities.Viaggio;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.exceptions.BadRequestException;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewDipendenteDTO;
-import RomanoPietro.Unit5Week2ProgettoSettimanale.payloads.NewViaggioDTO;
 import RomanoPietro.Unit5Week2ProgettoSettimanale.services.DipendenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +23,7 @@ import java.util.stream.Collectors;
 3. GET http://localhost:3003/dipendente/{dipendenteId}
 4. PUT http://localhost:3003/dipendente/{dipendenteId} (+ req.body)
 5. DELETE http://localhost:3003/dipendente/{dipendenteId} --> 204
+6. PATCH http://localhost:3005/dipendente/{dipendenteID}/avatar
 *
 * **************************************************************
 */
@@ -78,6 +76,7 @@ public class DipendenteController {
         this.dipendenteService.findByIdAndDelete(dipendenteId);
     }
 
+    //6. PATCH http://localhost:3005/dipendente/{dipendenteID}/avatar
     @PatchMapping("/{dipendenteId}/avatar")
     public String updloadAvatar(@RequestParam("avatar") MultipartFile file) throws IOException {
         return this.dipendenteService.uploadAvatar(file);

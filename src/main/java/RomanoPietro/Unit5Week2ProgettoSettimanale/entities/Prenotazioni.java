@@ -4,7 +4,9 @@ package RomanoPietro.Unit5Week2ProgettoSettimanale.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+
 
 @Entity
 @Table(name = "prenotazioni")
@@ -28,10 +30,10 @@ public class Prenotazioni {
     @JoinColumn(name = "dipendente_id")
     private Dipendente dipendente;
 
-    private Date dataRichiesta;
+    private String dataRichiesta;
     private String preferenze;
 
-    public Prenotazioni(Viaggio viaggio, Dipendente dipendente, Date dataRichiesta, String preferenze) {
+    public Prenotazioni(Viaggio viaggio, Dipendente dipendente, String dataRichiesta, String preferenze) {
         this.viaggio = viaggio;
         this.dipendente = dipendente;
         this.dataRichiesta = dataRichiesta;
