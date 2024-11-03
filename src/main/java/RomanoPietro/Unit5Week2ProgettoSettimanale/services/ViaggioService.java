@@ -78,20 +78,7 @@ public class ViaggioService {
         this.viaggioRepository.delete(found);
     }
 
-//    //6.=============================================
-//
-//        public Viaggio updateNuovoStato(long viaggioId, String nuovoStato) {
-//        Viaggio found = viaggioRepository.findById(viaggioId)
-//                .orElseThrow(() -> new ViaggioNotFoundException("Viaggio non trovato con ID: " + viaggioId));
-//
-//        if (nuovoStato != null && !nuovoStato.isEmpty()) {
-//            found.setStatoViaggio(StatoViaggio.valueOf(nuovoStato));
-//        } else {
-//            throw new BadRequestException("Lo stato non può essere nullo o vuoto!");
-//        }
-//
-//        return viaggioRepository.save(found);
-//    }
+    //6.======================================================================================================================
 
     public Viaggio updateNuovoStato(long viaggioId, String nuovoStato) {
         Viaggio found = viaggioRepository.findById(viaggioId)
