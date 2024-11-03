@@ -55,13 +55,18 @@ public class ViaggioService {
     public Viaggio findByIdAndUpdate(long viaggioId, NewViaggioDTO body) {
         Viaggio found = this.findById(viaggioId);
 
-//        if(found.getData().equals(body.data())
-//                && found.getDestinazione().equals(body.destinazione()))
-//            this.viaggioRepository.findByDataAndDestinazione(body.data(), body.destinazione());
+        if(found.getData().equals(body.data())
+                && found.getDestinazione().equals(body.destinazione()))
+            this.viaggioRepository.findByDataAndDestinazione(body.data(), body.destinazione());
 
         found.setDestinazione(body.destinazione());
         found.setData(body.data());
-        found.setStatoViaggio(StatoViaggio.valueOf(body.stato()));
+
+        if (body.stato() != null && !body.stato().isEmpty()) {
+                found.setStatoViaggio(StatoViaggio.valueOf(body.stato()));
+                throw new BadRequestException("StatoViaggio non valido: " + body.stato());
+
+        }
 
         return this.viaggioRepository.save(found);
     }
