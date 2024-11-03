@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 /*
 *****************************CRUD******************************
 *
-1. GET http://localhost:3003/dipendente
-2. POST http://localhost:3003/dipendente (+ req.body) --> 201
-3. GET http://localhost:3003/dipendente/{dipendenteId}
-4. PUT http://localhost:3003/dipendente/{dipendenteId} (+ req.body)
-5. DELETE http://localhost:3003/dipendente/{dipendenteId} --> 204
+1. GET http://localhost:3005/dipendente
+2. POST http://localhost:3005/dipendente (+ req.body) --> 201
+3. GET http://localhost:3005/dipendente/{dipendenteId}
+4. PUT http://localhost:3005/dipendente/{dipendenteId} (+ req.body)
+5. DELETE http://localhost:3005/dipendente/{dipendenteId} --> 204
 6. PATCH http://localhost:3005/dipendente/{dipendenteID}/avatar
 *
 * **************************************************************
