@@ -92,4 +92,16 @@ public class ViaggioService {
 //
 //        return viaggioRepository.save(found);
 //    }
+
+    public Viaggio updateNuovoStato(long viaggioId, String nuovoStato) {
+        Viaggio found = viaggioRepository.findById(viaggioId)
+                .orElseThrow(() -> new ViaggioNotFoundException("Viaggio non trovato con ID: " + viaggioId));
+
+        if (!nuovoStato.equals("IN_PROGRAMMA") && !nuovoStato.equals("COMPLETATO")) {
+            throw new BadRequestException("Lo stato deve essere 'IN_PROGRAMMA' o 'COMPLETATO'.");
+        }
+
+        found.setStatoViaggio(StatoViaggio.valueOf(nuovoStato));
+        return viaggioRepository.save(found);
+    }
 }
